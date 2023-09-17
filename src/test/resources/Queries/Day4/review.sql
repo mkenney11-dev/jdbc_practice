@@ -1,0 +1,20 @@
+--all information for who is getting 3rd lowest salary
+
+SELECT * FROM EMPLOYEES;
+
+
+
+
+SELECT MAX(SALARY) FROM
+                  (SELECT DISTINCT SALARY FROM EMPLOYEES
+                                          ORDER BY SALARY ASC)
+WHERE ROWNUM <4;
+
+SELECT * FROM EMPLOYEES
+WHERE SALARY = (SELECT MAX(SALARY) FROM
+    (SELECT DISTINCT SALARY FROM EMPLOYEES
+    ORDER BY SALARY ASC)
+WHERE ROWNUM <4);
+
+
+

@@ -1,0 +1,83 @@
+SELECT * FROM EMPLOYEES;
+
+SELECT Distinct JOB_ID FROM EMPLOYEES;
+
+
+SELECT AVG(SALARY) FROM EMPLOYEES
+WHERE JOB_ID = 'IT_PROG'; --5760
+
+
+SELECT AVG(SALARY) FROM EMPLOYEES
+WHERE JOB_ID = 'AC_MGR';--12008
+
+
+SELECT AVG(SALARY) FROM EMPLOYEES
+WHERE JOB_ID = 'AC_ACCOUNT'; --8300
+
+
+--The following query will get avg salary for each unique job id
+SELECT JOB_ID, AVG(SALARY)
+FROM EMPLOYEES
+GROUP BY JOB_ID;
+
+-- we can take it a step further and add a column for number of employees per dept and total cost
+SELECT JOB_ID, AVG(SALARY), COUNT(*), SUM(SALARY)
+FROM EMPLOYEES
+GROUP BY JOB_ID;
+
+-- display how many depts are in each location
+
+
+SELECT LOCATION_ID, COUNT(*)
+FROM DEPARTMENTS
+GROUP BY LOCATION_ID
+ORDER BY COUNT(*) DESC;
+
+
+
+-- display how many countries we have in each region
+SELECT REGION_ID, COUNT(*)
+FROM COUNTRIES
+GROUP BY REGION_ID
+ORDER BY 1 DESC;
+
+
+-- get total salary for each dept from employees table
+SELECT DEPARTMENT_ID, SUM(SALARY), COUNT (*)
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID is not NULL
+GROUP BY DEPARTMENT_ID;
+
+--job ids where avg salary is more than 5k
+
+SELECT JOB_ID, AVG(SALARY)
+FROM EMPLOYEES
+GROUP BY JOB_ID
+HAVING AVG(SALARY) > 5000;
+
+--display depts where their avg salary is  mroe than 6k
+SELECT DEPARTMENT_ID, ROUND(AVG(SALARY))
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID IS NOT NULL
+GROUP BY DEPARTMENT_ID
+HAVING AVG(SALARY) >6000;
+
+--INTERVIEW QUESTION
+--display duplicate firstname from employees table
+SELECT FIRST_NAME, COUNT(*)
+FROM EMPLOYEES
+GROUP BY FIRST_NAME
+HAVING COUNT(FIRST_NAME) >1;
+
+--display dept id where employees count is bigger than 5
+
+SELECT DEPARTMENT_ID, COUNT(*)
+FROM EMPLOYEES
+GROUP BY DEPARTMENT_ID
+HAVING COUNT(*) >5;
+
+
+SELECT FIRST_NAME, COUNT(*)
+FROM EMPLOYEES
+GROUP BY FIRST_NAME
+HAVING COUNT(FIRST_NAME) >1;
